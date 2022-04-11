@@ -17,4 +17,18 @@ export const resolvers = {
       return await Category.findAll({ include: Meal });
     },
   },
+  Mutation: {
+    addMeal: async (parent, args) => {
+      const {input} = args;
+      await Meal.create(input);
+      return { ok: true };
+    },
+    updateMeal: async (parent, args) => {
+      const {id, input} = args;
+      await Meal.update(input, {
+        where: { id },
+      }); 
+      return { ok: true };
+    },
+  },
 };
